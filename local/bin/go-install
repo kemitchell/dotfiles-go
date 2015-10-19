@@ -1,0 +1,20 @@
+#!/bin/zsh
+set -e
+
+if [ -z "$1" ]; then
+  echo "Usage: <version>"
+  exit 1
+fi
+
+VERSION="$1"
+REPO="https://go.googlesource.com/go"
+
+if [ ! -d $HOME/.local/go ]; then
+  git clone "$REPO" "$GOROOT"
+fi
+
+cd "$GOROOT"
+git fetch
+git checkout "go$VERSION"
+cd src
+GOROOT_BOOTSTRAP="$GOROOT" bash ./all.bash
