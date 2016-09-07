@@ -1,21 +1,19 @@
 #!/bin/zsh
 set -e
 
-if [ -z "$1" ]; then
+VERSION="$1"
+
+if [ -z "$VERSION" ]; then
   echo "Usage: <version>"
   exit 1
 fi
 
-VERSION="$1"
-REPO="https://go.googlesource.com/go"
+TMP=$(mktemp)
+function finish {
+  rm -rf "$TMP"
+}
+trap finish EXIT
 
-if [ ! -d "$HOME/.local/go" ]; then
-  git clone "$REPO" "$GOROOT"
-fi
-
-cd "$GOROOT"
-pwd
-git fetch
-git checkout "go$VERSION"
-cd src
-GOROOT_BOOTSTRAP="$GOROOT" bash ./all.bash
+wget -O "$TMP" "https://storage.googleapis.com/golang/go$VERSION.linux-amd64.tar.gz"
+mkdir -p "$PREFIX/go"
+tar xzf "$TMP" -C "$PREFIX/go" --strip-components=1
