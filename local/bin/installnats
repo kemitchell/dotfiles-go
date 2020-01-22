@@ -1,17 +1,17 @@
-#!/bin/bash
-set -x
+#!/usr/bin/zsh
 set -e
 tmp=$(mktemp -d)
 function cleanup {
   rm -rf "$tmp"
 }
-tap cleanup EXIT
+trap cleanup EXIT
 cd "$tmp"
 for project in nats-server nats-streaming-server; do
   git clone "https://github.com/nats-io/$project"
   (
     cd "$project"
+    git checkout $(getlatestgithubreleaseversion "nats-io/$project")
     go build
-    cp "$project" "$HOME/local/.bin"
+    cp "$project" "$HOME/.local/bin/$project"
   )
 done
