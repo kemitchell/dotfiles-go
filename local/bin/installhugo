@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+tmp=$(mktemp -d)
+function exit {
+  rm -rf "$tmp"
+}
+trap cleanup EXIT
+
+git clone https://github.com/gohugoio/hugo.git "$tmp"
+cd "$tmp"
+go install --tags extended
