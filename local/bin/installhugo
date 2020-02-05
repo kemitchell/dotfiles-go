@@ -2,7 +2,7 @@
 set -e
 
 tmp=$(mktemp -d)
-function exit {
+function cleanup {
   rm -rf "$tmp"
 }
 trap cleanup EXIT

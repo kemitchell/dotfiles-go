@@ -1,0 +1,8 @@
+#!/usr/bin
+selecta <<<EOS
+github.com/BurntSushi/toml
+github.com/mitchell/mapstructure
+github.com/qri-io/jsonschema
+github.com/xipuuv/gojsonschema
+github.com/yookoala/realpath
+EOS
