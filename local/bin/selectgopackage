@@ -1,5 +1,4 @@
-#!/usr/bin
-selecta <<<EOS
+selecta <<EOS
 github.com/BurntSushi/toml
 github.com/mitchell/mapstructure
 github.com/qri-io/jsonschema
