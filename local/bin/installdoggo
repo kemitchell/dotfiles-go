@@ -1,0 +1,2 @@
+#!/bin/sh
+go get github.com/mr-karan/doggo/cmd/doggo
