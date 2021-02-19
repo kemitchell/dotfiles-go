@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
-tmp=$(mktemp -d)
-function cleanup {
-  rm -rf "$tmp"
-}
-trap cleanup EXIT
-
-git clone https://github.com/gohugoio/hugo.git "$tmp"
-cd "$tmp"
+repo="$PREFIX/source/hugo"
+if [ -d "$repo" ]; then
+  cd "$repo"
+  git fetch origin
+else
+  git clone https://github.com/gohugoio/hugo.git "$repo"
+fi
+cd "$repo"
 go install --tags extended
