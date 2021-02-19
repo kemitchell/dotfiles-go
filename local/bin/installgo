@@ -21,7 +21,9 @@ mkdir -p "$PREFIX/go"
 wget -O "$tmp" "https://storage.googleapis.com/golang/go$version.linux-amd64.tar.gz"
 tar xzf "$tmp" -C "$PREFIX/go" --strip-components=1
 for installer in $HOME/.dotfiles/go/local/bin/install*; do
-  if [ "$installer" != "installgo" ]; then
+  basename=$(basename "$installer")
+  if [ "$basename" != "installgo" ]; then
+    echo "$installer"
     "$installer"
   fi
 done
