@@ -1,19 +1,19 @@
-#!/bin/zsh
+#!/bin/sh
 set -e
 
-VERSION="$1"
+version="$1"
 
-if [ -z "$VERSION" ]; then
+if [ -z "$version" ]; then
   echo "Usage: <version>"
   exit 1
 fi
 
-TMP=$(mktemp)
-function finish {
-  rm -rf "$TMP"
+tmp=$(mktemp)
+finish () {
+  rm -rf "$tmp"
 }
 trap finish EXIT
 
-wget -O "$TMP" "https://storage.googleapis.com/golang/go$VERSION.linux-amd64.tar.gz"
+wget -O "$tmp" "https://storage.googleapis.com/golang/go$version.linux-amd64.tar.gz"
 mkdir -p "$PREFIX/go"
-tar xzf "$TMP" -C "$PREFIX/go" --strip-components=1
+tar xzf "$tmp" -C "$PREFIX/go" --strip-components=1
