@@ -14,11 +14,11 @@ finish () {
 }
 trap finish EXIT
 
-wget -O "$tmp" "https://storage.googleapis.com/golang/go$version.linux-amd64.tar.gz"
-mkdir -p "$PREFIX/go"
 if [ -d "$PREFIX/go" ]; then
   mv "$PREFIX/go" "$PREFIX/go-$(date --iso-8601)"
 fi
+mkdir -p "$PREFIX/go"
+wget -O "$tmp" "https://storage.googleapis.com/golang/go$version.linux-amd64.tar.gz"
 tar xzf "$tmp" -C "$PREFIX/go" --strip-components=1
 for installer in $HOME/.dotfiles/go/local/bin/install*; do
   if [ "$installer" != "installgo" ]; then
