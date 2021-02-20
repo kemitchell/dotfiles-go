@@ -8,5 +8,6 @@ if [ -d "$repo" ]; then
 else
   git clone https://github.com/gohugoio/hugo.git "$repo"
 fi
+
 cd "$repo"
 go install --tags extended
