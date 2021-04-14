@@ -5,9 +5,10 @@ repo="$PREFIX/source/hugo"
 if [ -d "$repo" ]; then
   cd "$repo"
   git fetch origin
+  git reset --hard origin/master
 else
   git clone https://github.com/gohugoio/hugo.git "$repo"
+  cd "$repo"
 fi
 
-cd "$repo"
 go install --tags extended
