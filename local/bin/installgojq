@@ -1,0 +1,2 @@
+#!/bin/sh
+exec go get github.com/itchyny/gojq/cmd/gojq
