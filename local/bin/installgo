@@ -1,29 +1,4 @@
 #!/bin/sh
 set -e
-
-version="$1"
-
-if [ -z "$version" ]; then
-  echo "Usage: <version>"
-  exit 1
-fi
-
-tmp=$(mktemp)
-finish () {
-  rm -rf "$tmp"
-}
-trap finish EXIT
-
-if [ -d "$PREFIX/go" ]; then
-  mv "$PREFIX/go" "$PREFIX/go-$(date --iso-8601)"
-fi
-mkdir -p "$PREFIX/go"
-wget -O "$tmp" "https://storage.googleapis.com/golang/go$version.linux-amd64.tar.gz"
-tar xzf "$tmp" -C "$PREFIX/go" --strip-components=1
-for installer in $HOME/.dotfiles/go/local/bin/install*; do
-  basename=$(basename "$installer")
-  if [ "$basename" != "installgo" ]; then
-    echo "$installer"
-    "$installer"
-  fi
-done
+asdf plugin-add golang https://github.com/kennyp/asdf-golang.git || true
+asdf install golang $(asdf latest golang)
